@@ -32,7 +32,6 @@ const renderCalendar = () => {
 
         if(isDateExist!=-1){
             valuesPrint+="&"+savedDates[isDateExist].ID
-            console.log(datevalue)
             if(isToday=="active"){
                 isToday="Today";
             }else{
@@ -76,6 +75,21 @@ function loadData(data){
 function changeState(object){
     values=object.getAttribute("data-value");
     newValues=values.split('&');
+    if(newValues.length==1){
+        if(Today==newValues[0]){
+            object.classList.remove("active");
+            object.classList.add("Today");
+        }else{
+            object.classList.add("SELECTED");
+        }
+    }else{
+        if(Today==newValues[0]){
+            object.classList.remove("Today");
+            object.classList.add("active");
+        }else{
+            object.classList.remove("SELECTED");
+        }
+    }
     DateControl(((newValues.length==1)?newValues[0]:newValues[1]),newValues.length,object,newValues)
 }
 
@@ -87,30 +101,14 @@ function DateControl(Values,Mode,object,newValues){
         type: "POST",              
         data: dataToSend,          
         success: function(response) {
-            console.log(Today)
             if(Mode==1){
-                if(Today==newValues[0]){
-                    object.classList.remove("active");
-                    object.classList.add("Today");
-                }else{
-                    object.classList.add("SELECTED");
-                }
-                
                 object.setAttribute("data-value",`${newValues[0]}&${response}`);
                 savedDates.push({Date:newValues[0],ID:response})
             }else{
-                if(Today==newValues[0]){
-                    object.classList.remove("Today");
-                    object.classList.add("active");
-                }else{
-                    object.classList.remove("SELECTED");
-                }
-
                 object.classList.remove("SELECTED");
                 object.setAttribute("data-value",`${newValues[0]}`);
                 savedDates = savedDates.filter(item => !(item.Date == newValues[0] && item.ID == newValues[1]));
             }
-            console.log(savedDates)
         },
         error: function(xhr, status, error) {
             // Handle errors
