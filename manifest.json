@@ -4,8 +4,8 @@
     "description": "This is a prototype date marking PHP website for some personal use.",
     "start_url": "index.php",
     "display": "standalone",
-    "background_color": "#0b0019",
-    "theme_color": "#0b0019",
+    "background_color": "#e8e8e8",
+    "theme_color": "#e8e8e8",
     "icons": [
       {
         "src": "Assets/Logo192x192.png",
