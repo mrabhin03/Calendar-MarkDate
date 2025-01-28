@@ -1,0 +1,22 @@
+{
+    "name": "My Calender",
+    "short_name": "My Calender",
+    "description": "This is a prototype date marking PHP website for some personal use.",
+    "start_url": "index.php",
+    "display": "standalone",
+    "background_color": "#0b0019",
+    "theme_color": "#0b0019",
+    "icons": [
+      {
+        "src": "Assets/Logo192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "Assets/Logo512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
