@@ -12,6 +12,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
 const renderCalendar = () => {
+    ChangeHeader()
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), 
     lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(),
     lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), 
@@ -71,10 +72,21 @@ function loadData(data){
     renderCalendar();
 }
 
+function ChangeHeader(){
+    let maxDate = savedDates.reduce((max, current) => {
+        return new Date(current.Date) > new Date(max.Date) ? current : max;
+    });
+    value=DateDifference(maxDate.Date,Today)
+    document.getElementById("gapDate").innerHTML=`Date Gap: ${value}`
+}
+
 
 function changeState(object){
     values=object.getAttribute("data-value");
     newValues=values.split('&');
+    if(Today<newValues[0]){
+        return;
+    }
     if(newValues.length==1){
         if(Today==newValues[0]){
             object.classList.remove("active");
@@ -109,10 +121,22 @@ function DateControl(Values,Mode,object,newValues){
                 object.setAttribute("data-value",`${newValues[0]}`);
                 savedDates = savedDates.filter(item => !(item.Date == newValues[0] && item.ID == newValues[1]));
             }
+            ChangeHeader()
         },
         error: function(xhr, status, error) {
             // Handle errors
             console.log("AJAX error: " + status + " " + error);
         }
     });
+}
+
+
+function DateDifference(date1, date2) {
+    console.log(date1+"  "+date2)
+    const firstDate = new Date(date1);
+    const secondDate = new Date(date2);
+    const differenceInMilliseconds = Math.abs(secondDate - firstDate);
+    const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+
+    return differenceInDays;
 }

@@ -12,13 +12,27 @@
     <script src="script.js?v=<?=time()?>" defer></script>
   </head>
   <?php
+  function DateDiff($Last,$Today){
+    $date1 = new DateTime($Last);
+    $date2 = new DateTime($Today);
+    $diff = $date1->diff($date2);
+    return $diff->days;
+  }
   include 'Connection.php';
   $sql="SELECT * FROM dates";
   $values=$conn->query($sql);
+
+  // $sql2="SELECT Date FROM dates ORDER BY Date DESC";
+  // $DatesValue=$conn->query($sql2)->fetch_assoc()['Date'];
+  // $today = date("Y-m-d");
   
   ?>
   <body>
     <div class="wrapper">
+      <div class='details'>
+        <div id='gapDate'>
+        </div>
+      </div>
       <header>
         <p class="current-date"></p>
         <div class="icons">
@@ -44,7 +58,7 @@
     calendar=[];
     <?php
     while($value=$values->fetch_assoc()){
-      echo "calendar.push({Date:'".$value['Date']."',ID:".$value['ID']."});";
+      echo "calendar.push({Date:'".$value['Date']."',ID:'".$value['ID']."'});";
     }
     ?>
 

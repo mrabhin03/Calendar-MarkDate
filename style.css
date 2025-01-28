@@ -16,6 +16,21 @@ body{
   /* background: #014069; */
 
 }
+.details{
+  width: 100%;
+  padding: 02px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+.details>div{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
 .wrapper{
   width: 450px;
   background: #00001494;
