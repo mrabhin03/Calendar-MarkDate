@@ -32,6 +32,7 @@
       <div class='details'>
         <div id='gapDate'>
         </div>
+        <div id='okay'></div>
       </div>
       <header>
         <p class="current-date"></p>
@@ -58,7 +59,7 @@
     calendar=[];
     <?php
     while($value=$values->fetch_assoc()){
-      echo "calendar.push({Date:'".$value['Date']."',ID:'".$value['ID']."'});";
+      echo "calendar.push({Date:'".$value['Date']."'});";
     }
     ?>
 

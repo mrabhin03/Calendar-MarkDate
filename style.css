@@ -140,19 +140,63 @@ header .current-date{
 .days li::before{
   background-color: rgb(255, 255, 255);
 }
+
+
+
 .days li.SELECTED::before{
-  background-color: red;
+  background-color: rgb(147, 70, 255);
+}
+.days li.inactive.SELECTED::before{
+  background-color: rgba(140, 0, 255, 0.427);
+}
+.days li.inactive.SELECTED{
+  color: white;
 }
 .days li.SELECTED{
   color: white;
 }
+
+
+.days li.NotOkayDate{
+  color: white;
+}
+.days li.NotOkayDate::before{
+  background-color: rgb(249, 42, 66);
+}
+.days li.inactive.NotOkayDate::before{
+  background-color: rgba(249, 42, 66, 0.401);
+}
+
+.days li.active.NotOkayDate::before{
+  background-color: rgba(249, 118, 42, 0.822);
+}
+
+
 .days li.Today{
+  color: white;
+}
+.days li.Today::before{
+  background-color: rgb(255, 145, 0);
   color: white;
 }
 
 
-.days li.Today::before{
-  background-color: rgb(255, 145, 0);
+
+.days li.OkayDate::before{
+  background-color: rgb(3, 193, 3);
+}
+.days li.OkayDate{
   color: white;
+}
+
+
+
+.days li.active.OkayDate::before{
+  background-color: rgb(6, 199, 167);
+}
+
+
+.days li.inactive.OkayDate::before{
+  background-color: rgba(3, 193, 3, 0.408);
 }
 
