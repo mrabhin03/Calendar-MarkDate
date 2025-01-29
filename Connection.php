@@ -1,4 +1,4 @@
 <?php
-  // $conn=new mysqli("localhost","root","","calenderdata");
-  include 'Connection2.php';
+  $conn=new mysqli("localhost","root","","calenderdata");
+  // include 'Connection2.php';
 ?>

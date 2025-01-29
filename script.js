@@ -48,23 +48,25 @@ const renderCalendar = () => {
 
 function futureValue(){
     if(savedDates.length==0){
-        FutureOut="Today"
-        OGDate=FutureDate=Today;
+        FutureOut="Okay"
+        OGDate=Today;
     }else{
         let maxDate = savedDates.reduce((max, current) => {
             return new Date(current.Date) > new Date(max.Date) ? current : max;
         });
         OGDate=maxDate.Date;
         let TheDate=new Date(maxDate.Date)
-        TheDate.setDate(TheDate.getDate()+7);
-        FutureOut=TheDate.toISOString().split("T")[0];
-        FutureDate=FutureOut
+        TheDate.setDate(TheDate.getDate()+4);
+        FutureDate=TheDate.toISOString().split("T")[0];
+
+        FutureOut=(new Date(FutureDate)<=new Date(Today))?FutureOut="Okay"
+        :FutureOut="Not Okay";
     }
-    FutureDateSet(FutureDate,OGDate);
-    document.getElementById("okay").innerHTML=`Next: ${FutureOut}`;
+    FutureDateSet(OGDate);
+    document.getElementById("okay").innerHTML=`Today: ${FutureOut}`;
 }
 
-function FutureDateSet(TheDate,OGDate){
+function FutureDateSet(OGDate){
     DatesV=document.querySelectorAll(".OkayDate");
     DatesV.forEach((element)=>{
         element.classList.remove("OkayDate")
