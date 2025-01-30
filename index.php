@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <script src="script.js?v=<?=time()?>" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </head>
   <?php
   function DateDiff($Last,$Today){
@@ -29,18 +31,18 @@
   ?>
   <body>
     <div class="wrapper">
-      <div class='details'>
-        <div id='gapDate'>
-        </div>
-        <div id='okay'></div>
-      </div>
       <header>
         <p class="current-date"></p>
         <div class="icons">
-          <span id="prev" class="material-symbols-rounded">chevron_left</span>
-          <span id="next" class="material-symbols-rounded">chevron_right</span>
+          <span id="prev" class="material-symbols-rounded"><ion-icon name="chevron-back-outline"></ion-icon></span>
+          <span id="next" class="material-symbols-rounded"><ion-icon name="chevron-forward-outline"></ion-icon></span>
         </div>
       </header>
+      <div class='details'>
+        <div id='gapDate'>
+          <div id='gapBar'></div>
+        </div>
+      </div>
       <div class="calendar">
         <ul class="weeks">
           <li>Sun</li>
@@ -68,4 +70,5 @@
             loadData(calendar);
     };
   </script>
+  
 </html>

@@ -1,7 +1,8 @@
 const daysTag = document.querySelector(".days"),
 currentDate = document.querySelector(".current-date"),
 prevNextIcon = document.querySelectorAll(".icons span");
-var savedDates;
+var savedDates=[];
+const DateGap=7;
 var inserting=false;
 let date = new Date(),
 currYear = date.getFullYear(),
@@ -55,15 +56,9 @@ function futureValue(){
             return new Date(current.Date) > new Date(max.Date) ? current : max;
         });
         OGDate=maxDate.Date;
-        let TheDate=new Date(maxDate.Date)
-        TheDate.setDate(TheDate.getDate()+4);
-        FutureDate=TheDate.toISOString().split("T")[0];
-
-        FutureOut=(new Date(FutureDate)<=new Date(Today))?FutureOut="Okay"
-        :FutureOut="Not Okay";
     }
     FutureDateSet(OGDate);
-    document.getElementById("okay").innerHTML=`Today: ${FutureOut}`;
+    // document.getElementById("okay").innerHTML=`Today: ${FutureOut}`;
 }
 
 function FutureDateSet(OGDate){
@@ -75,10 +70,13 @@ function FutureDateSet(OGDate){
     NotDatesV.forEach((element)=>{
         element.classList.remove("NotOkayDate")
     })
+    if(DateDifference(OGDate,Today)>45){
+        return
+    }
     let i=1
     while(true){
         let className;
-        if(i<5){
+        if(i<DateGap){
             className="NotOkayDate";
         }else{
             className="OkayDate";
@@ -127,7 +125,11 @@ function CheckDates(i,Mode){
         isToday = i === date.getDate() && currMonth === new Date().getMonth() 
                      && currYear === new Date().getFullYear() ? "active" : "";
     }else{
-        isToday="inactive"
+        isToday="";
+        if(datevalue==Today){
+            isToday="active ";
+        }
+        isToday+="inactive"
     }
 
     if(isDateExist!=-1){
@@ -162,18 +164,33 @@ function loadData(data){
     savedDates=data;
     renderCalendar();
 }
+renderCalendar();
+
 
 function ChangeHeader(){
     futureValue()
+    let BarObj=document.getElementById("gapBar");
     if(savedDates.length==0){
-        document.getElementById("gapDate").innerHTML=`Date Gap: No Date`
+        BarObj.style.backgroundColor="rgb(3, 193, 3)"
+        BarObj.style.width="100%"
+        // document.getElementById("gapDate").innerHTML=`Date Gap: No Date`
         return
     }
     let maxDate = savedDates.reduce((max, current) => {
         return new Date(current.Date) > new Date(max.Date) ? current : max;
     });
+
     value=DateDifference(maxDate.Date,Today)
-    document.getElementById("gapDate").innerHTML=`Date Gap: ${value}`
+    value=(value<=0)?1:value;
+    let Pre=((100/70)*((value>=7)?70:value*10))
+    if(value>=6){
+        BarObj.style.backgroundColor="rgba(5, 211, 5, 0.85)"
+    }else if(value>3){
+        BarObj.style.backgroundColor="rgb(255, 145, 0)"
+    }else{
+        BarObj.style.backgroundColor="red"
+    }
+    BarObj.style.width=Pre+"%"
     
 }
 
